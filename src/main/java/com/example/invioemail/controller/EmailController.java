@@ -1,11 +1,10 @@
 package com.example.invioemail.controller;
 
 
+import com.example.invioemail.model.InfoEmailDto;
 import com.example.invioemail.service.InvioEmailService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 
@@ -23,6 +22,16 @@ public class EmailController {
     public ResponseEntity<String> sendEmail() throws MessagingException {
 
         this.invioEmailService.invioEmail();
+
+
+        return ResponseEntity.ok("Invio avvenuto con successo");
+    }
+
+
+    @PostMapping("send")
+    public ResponseEntity<String> sendEmailWithData(@RequestBody InfoEmailDto infoEmailDto) throws MessagingException {
+
+        this.invioEmailService.invioEmailWithData(infoEmailDto);
 
 
         return ResponseEntity.ok("Invio avvenuto con successo");
